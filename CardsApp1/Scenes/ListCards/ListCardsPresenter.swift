@@ -9,6 +9,7 @@ import Foundation
 
 protocol ListCardsPresentationLogic {
     func presentFetchedCards(response: ListCards.FetchCards.Response)
+    func presentCreatedCard(response: ListCards.CreateCard.CreateCard.Response)
 }
 
 class ListCardsPresenter: ListCardsPresentationLogic {
@@ -20,7 +21,11 @@ class ListCardsPresenter: ListCardsPresentationLogic {
             let displayedCard = ListCards.FetchCards.ViewModel.DisplayedCard(cardNumber: card.cardNumber, paymentTypeImage: card.paymentTypeImage.cardTypeImageName)
             displayedCards.append(displayedCard)
         }
-        let viewModel = ListCards.FetchCards.ViewModel(displayedCard: displayedCards)
+        let viewModel = ListCards.FetchCards.ViewModel(displayedCards: displayedCards)
         viewController?.displayFetchedCards(viewModel: viewModel)
+    }
+    
+    func presentCreatedCard(response: ListCards.CreateCard.CreateCard.Response) {
+        viewController?.displayCreatedCard()
     }
 }

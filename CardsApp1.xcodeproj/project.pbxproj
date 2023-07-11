@@ -26,6 +26,7 @@
 		026814942A5C5083007FA9EB /* ShowCardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026814892A5C5083007FA9EB /* ShowCardModels.swift */; };
 		026814952A5C5083007FA9EB /* ShowCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268148A2A5C5083007FA9EB /* ShowCardViewController.swift */; };
 		026814982A5C532C007FA9EB /* CardsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026814972A5C532C007FA9EB /* CardsMock.swift */; };
+		0268149B2A5D848E007FA9EB /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268149A2A5D848E007FA9EB /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		026814892A5C5083007FA9EB /* ShowCardModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCardModels.swift; sourceTree = "<group>"; };
 		0268148A2A5C5083007FA9EB /* ShowCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCardViewController.swift; sourceTree = "<group>"; };
 		026814972A5C532C007FA9EB /* CardsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsMock.swift; sourceTree = "<group>"; };
+		0268149A2A5D848E007FA9EB /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			children = (
 				026814602A5C49F4007FA9EB /* AppDelegate.swift */,
 				026814622A5C49F4007FA9EB /* SceneDelegate.swift */,
+				026814992A5D8477007FA9EB /* Extensions */,
 				026814962A5C531C007FA9EB /* Services */,
 				026814792A5C505E007FA9EB /* Models */,
 				026814762A5C503D007FA9EB /* Workers */,
@@ -162,6 +165,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		026814992A5D8477007FA9EB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0268149A2A5D848E007FA9EB /* UIColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -237,6 +248,7 @@
 				026814982A5C532C007FA9EB /* CardsMock.swift in Sources */,
 				026814922A5C5083007FA9EB /* ShowCardInteractor.swift in Sources */,
 				026814952A5C5083007FA9EB /* ShowCardViewController.swift in Sources */,
+				0268149B2A5D848E007FA9EB /* UIColor.swift in Sources */,
 				0268147B2A5C505E007FA9EB /* CardDTO.swift in Sources */,
 				026814912A5C5083007FA9EB /* ShowCardRouter.swift in Sources */,
 				026814652A5C49F4007FA9EB /* ListCardsViewController.swift in Sources */,

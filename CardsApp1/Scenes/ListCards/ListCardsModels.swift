@@ -19,7 +19,27 @@ enum ListCards {
                 var cardNumber: String
                 var paymentTypeImage: String
             }
-            var displayedCard: [DisplayedCard]
+            var displayedCards: [DisplayedCard]
+        }
+    }
+    
+    enum CreateCard {
+        struct CreatedCard {
+            var id: String
+            var cardNumber: String
+            var cardType: String
+        }
+        
+        enum CreateCard {
+            struct Request {
+                var createdCard: CreatedCard
+            }
+            struct Response {
+                var card: CardDTO?
+            }
+            struct ViewModel {
+                var createdCard: CardDTO?
+            }
         }
     }
 }

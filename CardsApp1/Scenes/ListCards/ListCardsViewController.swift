@@ -9,9 +9,11 @@ import UIKit
 
 protocol ListCardsDisplayLogic: AnyObject {
     func displayFetchedCards(viewModel: ListCards.FetchCards.ViewModel)
+    func displayCreatedCard()
 }
 
 class ListCardsViewController: UITableViewController, ListCardsDisplayLogic {
+    
     var interactor: ListCardsBusinessLogic?
     var router: (NSObject & ListCardsRoutingLogic & ListCardsDataPassing)?
     var displayedCards: [ListCards.FetchCards.ViewModel.DisplayedCard] = []
@@ -31,6 +33,7 @@ class ListCardsViewController: UITableViewController, ListCardsDisplayLogic {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CardTableViewCell")
     }
     
@@ -45,6 +48,10 @@ class ListCardsViewController: UITableViewController, ListCardsDisplayLogic {
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
+    }
+    
+    @IBAction func createCardButtonTapped(_ sender: Any) {
+        createCard()
     }
     
     // MARK: Routing
@@ -64,10 +71,19 @@ class ListCardsViewController: UITableViewController, ListCardsDisplayLogic {
     }
     
     func displayFetchedCards(viewModel: ListCards.FetchCards.ViewModel) {
-        displayedCards = viewModel.displayedCard
+        displayedCards = viewModel.displayedCards
         tableView.reloadData()
     }
     
+    func createCard() {
+        interactor?.createCard()
+    }
+    
+    func displayCreatedCard() {
+        fetchCards()
+        tableView.reloadData()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchCards()

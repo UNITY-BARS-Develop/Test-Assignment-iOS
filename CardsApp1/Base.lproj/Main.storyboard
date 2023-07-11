@@ -64,7 +64,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Картки" id="07U-Ue-Y6u">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="d8s-nO-iJd"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="d8s-nO-iJd">
+                            <connections>
+                                <action selector="createCardButtonTapped:" destination="0aK-dU-5Q0" id="h5W-Sf-GWe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GVH-AF-MW3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
