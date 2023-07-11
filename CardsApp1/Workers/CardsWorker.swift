@@ -26,7 +26,7 @@ class CardsWorker {
             do {
                 let cards = try self?.managedContext.fetch(Card.fetchRequest())
                 DispatchQueue.main.async {
-                    completionHandler(cards?.reversed() ?? [])
+                    completionHandler(cards ?? [])
                 }
             } catch {
                 print(error.localizedDescription)

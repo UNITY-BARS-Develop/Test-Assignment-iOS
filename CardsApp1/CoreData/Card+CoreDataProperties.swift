@@ -26,7 +26,10 @@ enum CardType: String, CaseIterable {
 extension Card {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Card> {
-        return NSFetchRequest<Card>(entityName: "Card")
+        let fetchRequest = NSFetchRequest<Card>(entityName: "Card")
+        let sort = NSSortDescriptor(key: #keyPath(Card.date), ascending: false)
+        fetchRequest.sortDescriptors = [sort]
+        return fetchRequest
     }
 
     @NSManaged public var cardNumber: String
