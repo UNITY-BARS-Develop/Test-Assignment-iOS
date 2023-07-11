@@ -12,7 +12,7 @@ enum ListCards {
         struct Request {}
         
         struct Response {
-            var cards: [CardDTO]
+            var cards: [Card]
         }
         struct ViewModel {
             struct DisplayedCard {
@@ -25,7 +25,6 @@ enum ListCards {
     
     enum CreateCard {
         struct CreatedCard {
-            var id: String
             var cardNumber: String
             var cardType: String
         }
@@ -35,10 +34,10 @@ enum ListCards {
                 var createdCard: CreatedCard
             }
             struct Response {
-                var card: CardDTO?
+                var card: Card?
             }
             struct ViewModel {
-                var createdCard: CardDTO?
+                var createdCard: Card?
             }
         }
     }

@@ -22,12 +22,12 @@ class ListCardsRouter: NSObject, ListCardsRoutingLogic, ListCardsDataPassing {
     func routeToShowCard(segue: UIStoryboardSegue?) {
         if let segue = segue {
             let destinationVC = segue.destination as! ShowCardViewController
-            var destinationDS = destinationVC.router!.dataStore! // TODO: ? to !
-            passDataToShowOrder(source: dataStore!, destination: &destinationDS)
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToShowCard(source: dataStore!, destination: &destinationDS)
         } else {
             let destinationVC = viewController?.storyboard?.instantiateViewController(withIdentifier: "ShowCardViewController") as! ShowCardViewController
             var destinationDS = destinationVC.router!.dataStore!
-            passDataToShowOrder(source: dataStore!, destination: &destinationDS)
+            passDataToShowCard(source: dataStore!, destination: &destinationDS)
             navigateToShowCard(source: viewController!, destination: destinationVC)
         }
     }
@@ -36,7 +36,7 @@ class ListCardsRouter: NSObject, ListCardsRoutingLogic, ListCardsDataPassing {
         source.show(destination, sender: nil)
     }
     
-    func passDataToShowOrder(source: ListCardsDataStore, destination: inout ShowCardDataStore) {
+    func passDataToShowCard(source: ListCardsDataStore, destination: inout ShowCardDataStore) {
         let selectedRow = viewController?.tableView.indexPathForSelectedRow?.row
         destination.card = source.cards?[selectedRow!]
     }

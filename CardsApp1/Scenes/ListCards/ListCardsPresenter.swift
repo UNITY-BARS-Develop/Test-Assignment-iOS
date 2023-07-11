@@ -18,7 +18,7 @@ class ListCardsPresenter: ListCardsPresentationLogic {
     func presentFetchedCards(response: ListCards.FetchCards.Response) {
         var displayedCards: [ListCards.FetchCards.ViewModel.DisplayedCard] = []
         for card in response.cards {
-            let displayedCard = ListCards.FetchCards.ViewModel.DisplayedCard(cardNumber: card.cardNumber, paymentTypeImage: card.paymentTypeImage.cardTypeImageName)
+            let displayedCard = ListCards.FetchCards.ViewModel.DisplayedCard(cardNumber: card.cardNumber, paymentTypeImage: card.paymentType)
             displayedCards.append(displayedCard)
         }
         let viewModel = ListCards.FetchCards.ViewModel(displayedCards: displayedCards)

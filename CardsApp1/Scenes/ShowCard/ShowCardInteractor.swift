@@ -12,13 +12,13 @@ protocol ShowCardBusinessLogic {
 }
 
 protocol ShowCardDataStore {
-    var card: CardDTO! { get set }
+    var card: Card! { get set }
 }
 
 class ShowCardInteractor: ShowCardBusinessLogic, ShowCardDataStore {
     var presenter: ShowCardPresentationLogic?
     
-    var card: CardDTO!
+    var card: Card!
     
     func getCard(request: ShowCard.GetCard.Request) {
         let response = ShowCard.GetCard.Response(card: card)

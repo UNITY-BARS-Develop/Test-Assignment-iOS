@@ -13,7 +13,7 @@ enum ShowCard {
         struct Request {}
         
         struct Response {
-            var card: CardDTO
+            var card: Card
         }
         
         struct ViewModel {

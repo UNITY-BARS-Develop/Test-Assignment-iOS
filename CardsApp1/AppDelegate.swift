@@ -10,9 +10,23 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    lazy var coreDataStack: CoreDataStack = .init(modelName: "CardModel")
+    
+    static let shareAppDelegate: AppDelegate = {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Unexpected app delegate type, did it change? \(String(describing: UIApplication.shared.delegate))")
+        }
+        return delegate
+    }()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // MARK: Save in background
+        coreDataStack.saveContext()
     }
 
     // MARK: UISceneSession Lifecycle

@@ -16,7 +16,7 @@ class ListCardsViewController: UITableViewController, ListCardsDisplayLogic {
     
     var interactor: ListCardsBusinessLogic?
     var router: (NSObject & ListCardsRoutingLogic & ListCardsDataPassing)?
-    var displayedCards: [ListCards.FetchCards.ViewModel.DisplayedCard] = []
+    private var displayedCards: [ListCards.FetchCards.ViewModel.DisplayedCard] = []
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -65,6 +65,8 @@ class ListCardsViewController: UITableViewController, ListCardsDisplayLogic {
         }
     }
     
+    // MARK: Fetching data
+    
     func fetchCards() {
         let request = ListCards.FetchCards.Request()
         interactor?.fetchCards(request: request)
@@ -83,6 +85,8 @@ class ListCardsViewController: UITableViewController, ListCardsDisplayLogic {
         fetchCards()
         tableView.reloadData()
     }
+    
+    // MARK: Lifecycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

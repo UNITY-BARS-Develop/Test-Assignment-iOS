@@ -8,25 +8,28 @@
 import Foundation
 
 protocol CardsStoreProtocol {
-    func fetchCards(completionHandler: @escaping (() throws -> [CardDTO]) -> Void)
-    func createCard(cardToCreate: CardDTO, completionHandler: @escaping (CardDTO) -> Void)
+    func fetchCards(completionHandler: @escaping (() throws -> [Card]) -> Void)
+    func createCard(cardToCreate: Card, completionHandler: @escaping (Card) -> Void)
 }
 
 class CardsWorker {
+    let managedContext = AppDelegate.shareAppDelegate.coreDataStack.managedContext
     var cardsStore: CardsStoreProtocol
+    
     
     init(cardsStore: CardsStoreProtocol) {
         self.cardsStore = cardsStore
     }
     
-    func fetchCards(completionHandler: @escaping ([CardDTO]) -> Void) {
-        cardsStore.fetchCards { (cards: () throws -> [CardDTO]) -> Void in
+    func fetchCards(completionHandler: @escaping ([Card]) -> Void) {
+        cardsStore.fetchCards { [weak self] (cards: () throws -> [Card]) -> Void in
             do {
-                let cards = try cards()
+                let cards = try self?.managedContext.fetch(Card.fetchRequest())
                 DispatchQueue.main.async {
-                    completionHandler(cards)
+                    completionHandler(cards?.reversed() ?? [])
                 }
             } catch {
+                print(error.localizedDescription)
                 DispatchQueue.main.async {
                     completionHandler([])
                 }
@@ -34,10 +37,15 @@ class CardsWorker {
         }
     }
     
-    func createCard(cardToCreate: CardDTO, completionHandler: @escaping (CardDTO) -> Void){
-        cardsStore.createCard(cardToCreate: cardToCreate) { card in
+    func createCard(cardToCreate: Card, completionHandler: @escaping (Card) -> Void){
+        cardsStore.createCard(cardToCreate: cardToCreate) { [weak self] card in
             DispatchQueue.main.async {
                 completionHandler(card)
+            }
+            do {
+                try self?.managedContext.save()
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }

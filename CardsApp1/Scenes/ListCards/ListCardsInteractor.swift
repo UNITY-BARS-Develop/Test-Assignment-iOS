@@ -13,15 +13,16 @@ protocol ListCardsBusinessLogic {
 }
 
 protocol ListCardsDataStore {
-    var cards: [CardDTO]? { get }
+    var cards: [Card]? { get }
 }
 
 class ListCardsInteractor: ListCardsBusinessLogic, ListCardsDataStore {
     
     var presenter: ListCardsPresentationLogic?
     
-    var cardsWorker = CardsWorker(cardsStore: CardsMock())
-    var cards: [CardDTO]?
+    var cardsWorker = CardsWorker(cardsStore: CardsStore())
+    var cards: [Card]?
+    let managedContext = AppDelegate.shareAppDelegate.coreDataStack.managedContext
     
     func fetchCards(request: ListCards.FetchCards.Request) {
         cardsWorker.fetchCards { (cards) -> Void in
@@ -34,28 +35,25 @@ class ListCardsInteractor: ListCardsBusinessLogic, ListCardsDataStore {
     func createCard() {
         let cardToCreate = createRandomCard()
         
-        cardsWorker.createCard(cardToCreate: cardToCreate) { (card: CardDTO?) in
+        cardsWorker.createCard(cardToCreate: cardToCreate) { (card: Card?) in
             let response = ListCards.CreateCard.CreateCard.Response(card: card)
             self.presenter?.presentCreatedCard(response: response)
         }
     }
     
-    private func createRandomCard() -> CardDTO {
+    private func createRandomCard() -> Card {
         var randomCardString = ""
-        var cardID = ""
-        let cardTypes: [CardType] = [.masterCard, .visa]
-        
-        for _ in 1...8 {
-            let randomDigit = Int.random(in: 0...9)
-            cardID += String(randomDigit)
-        }
-        
         for _ in 1...4 {
             let randomDigit = Int.random(in: 0...9)
             randomCardString += String(randomDigit)
         }
+        let newCard = Card(context: managedContext)
+        newCard.cardNumber = "**** **** **** \(randomCardString)"
+        let type = CardType.allCases.randomElement()!
+        newCard.paymentType = type.rawValue
+        newCard.date = Date()
         
-        return CardDTO(id: cardID, cardNumber: "**** **** **** \(randomCardString)", paymentTypeImage: cardTypes.randomElement()!)
+        return newCard
     }
     
     

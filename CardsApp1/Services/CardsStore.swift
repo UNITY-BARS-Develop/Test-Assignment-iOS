@@ -7,15 +7,15 @@
 
 import Foundation
 
-class CardsMock: CardsStoreProtocol {
+class CardsStore: CardsStoreProtocol {
     
-    static var cards: [CardDTO] = []
+    static var cards: [Card] = []
     
-    func fetchCards(completionHandler: @escaping (() throws -> [CardDTO]) -> Void) {
+    func fetchCards(completionHandler: @escaping (() throws -> [Card]) -> Void) {
         completionHandler { return type(of: self).cards }
     }
     
-    func createCard(cardToCreate: CardDTO, completionHandler: @escaping (CardDTO) -> Void) {
+    func createCard(cardToCreate: Card, completionHandler: @escaping (Card) -> Void) {
         type(of: self).cards.append(cardToCreate)
         completionHandler(cardToCreate)
     }

@@ -41,7 +41,9 @@ class ShowCardPresenter: ShowCardPresentationLogic {
         let card = response.card
         let displayedCard = ShowCard.GetCard.ViewModel.DisplayedCard(
             cardNumber: formatCardNumber(card.cardNumber),
-            paymentTypeImage: card.paymentTypeImage.cardTypeImageName, color: cardColor(cardType: card.paymentTypeImage), textColor: textColor(cardType: card.paymentTypeImage)
+            paymentTypeImage: CardType(rawValue: card.paymentType)?.rawValue ?? "",
+            color: cardColor(cardType: CardType(rawValue: card.paymentType)!),
+            textColor: textColor(cardType: CardType(rawValue: card.paymentType)!)
         )
         
         let viewModel = ShowCard.GetCard.ViewModel(displayedCard: displayedCard)
